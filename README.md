@@ -1,22 +1,9 @@
 ```markdown
-# Anomaly Detection API for Time Series
+# API de Detecção de Anomalias em Séries Temporais
 
-![GitHub](https://img.shields.io/github/license/your-username/anomaly-detection-api)
-![Python](https://img.shields.io/badge/python-3.x-blue.svg)
-![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
+Esta é uma API baseada em SOAP que permite a detecção de anomalias em dados de séries temporais usando Modelos de Mistura de Gaussianas (GMM). A API é capaz de lidar com tanto uma única série temporal quanto várias séries temporais.
 
-This is a SOAP-based API that allows you to detect anomalies in time series data using Gaussian Mixture Models (GMM). The API can handle both single time series and multiple time series.
-
-## Table of Contents
-
-- [Prerequisites](#prerequisites)
-- [Getting Started](#getting-started)
-- [API Usage](#api-usage)
-- [Examples](#examples)
-- [Notes](#notes)
-- [License](#license)
-
-## Prerequisites
+## Pré-requisitos
 
 - Python 3.x
 - NumPy
@@ -24,40 +11,33 @@ This is a SOAP-based API that allows you to detect anomalies in time series data
 - scikit-learn
 - spyne
 
-## Getting Started
+## Começando
 
-1. Clone this repository:
+1. Instale as dependências necessárias utilizando o seguinte comando:
 
-   ```bash
-   git clone https://github.com/your-username/anomaly-detection-api.git
-   cd anomaly-detection-api
+   ```
+   pip install numpy pandas scikit-learn spyne
    ```
 
-2. Install the required dependencies:
+2. Execute o servidor da API utilizando o código fornecido:
 
    ```bash
-   pip install -r requirements.txt
+   python seu_arquivo_da_api.py
    ```
 
-3. Run the API server:
+3. A API começará a ser servida na porta 8000.
 
-   ```bash
-   python your_api_script_name.py
-   ```
-
-4. The API will start serving on port 8000.
-
-## API Usage
+## Utilização da API
 
 ### Endpoint: `/detect_anomalies`
 
-This endpoint accepts a SOAP request with the following parameters:
+Este endpoint aceita uma requisição SOAP com os seguintes parâmetros:
 
-- `time_series_data`: A list of lists representing time series data (columns).
-- `sensitivity` (optional): A sensitivity parameter for anomaly detection (default is 1.0).
-- `percentile` (optional): A percentile parameter for anomaly detection (default is 5.0).
+- `time_series_data`: Uma lista de listas representando os dados das séries temporais (colunas).
+- `sensitivity` (opcional): Um parâmetro de sensibilidade para a detecção de anomalias (o padrão é 1.0).
+- `percentile` (opcional): Um parâmetro de percentil para a detecção de anomalias (o padrão é 5.0).
 
-#### Request Example:
+#### Exemplo de Requisição:
 
 ```xml
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://schemas.spyne.io/web">
@@ -68,9 +48,9 @@ This endpoint accepts a SOAP request with the following parameters:
             <item>
                <item>1.2</item>
                <item>2.5</item>
-               <!-- More data points -->
+               <!-- Mais pontos de dados -->
             </item>
-            <!-- More series -->
+            <!-- Mais séries -->
          </time_series_data>
          <sensitivity>1.5</sensitivity>
          <percentile>10.0</percentile>
@@ -79,7 +59,7 @@ This endpoint accepts a SOAP request with the following parameters:
 </soapenv:Envelope>
 ```
 
-#### Response Example:
+#### Exemplo de Resposta:
 
 ```xml
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://schemas.spyne.io/web">
@@ -90,27 +70,24 @@ This endpoint accepts a SOAP request with the following parameters:
             <item>
                <item>2</item>
                <item>5</item>
-               <!-- Detected anomaly indexes -->
+               <!-- Índices das anomalias detectadas -->
             </item>
-            <!-- Anomalies for other series -->
+            <!-- Anomalias para outras séries -->
          </return>
       </web:detect_anomaliesResponse>
    </soapenv:Body>
 </soapenv:Envelope>
 ```
 
-## Examples
+## Observações
 
-For more usage examples, refer to the [Examples](examples/) directory.
+- A API foi projetada para fins educacionais e ilustrativos. Recomenda-se estender e aprimorar o código para atender a requisitos específicos, como tratamento de erros, segurança e escalabilidade.
+- Sempre valide e processe seus dados antes de passá-los para a API.
 
-## Notes
+## Licença
 
-- The API is designed for educational and illustrative purposes. It's recommended to extend and enhance the code to meet specific requirements, such as error handling, security, and scalability.
-- Always validate and preprocess your data before passing it to the API.
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
 ```
 
-Este README.md inclui algumas melhorias, como um badge de licença, uma tabela de conteúdos, um link para exemplos e mais detalhes de uso. Certifique-se de ajustar o nome do repositório, as instruções de instalação e as URLs de acordo com o seu projeto. Isso ajudará os usuários a entenderem e usarem a sua API no GitHub.
+Lembre-se de substituir `seu_arquivo_da_api.py` pelo nome real do seu arquivo de código da API. Personalize as instruções e os exemplos conforme necessário para corresponder ao seu ambiente e cenário específicos. Certifique-se de fornecer informações claras para os usuários entenderem como usar a API e o que esperar dela.
