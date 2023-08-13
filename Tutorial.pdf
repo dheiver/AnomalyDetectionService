@@ -1,0 +1,78 @@
+## Tutorial: Usando a API de Detecção de Anomalias em Séries Temporais
+
+Neste tutorial, você aprenderá a usar a API de detecção de anomalias em séries temporais para identificar pontos de anomalia em seus dados.
+
+### Passo 1: Instalar Dependências
+
+Certifique-se de ter as bibliotecas necessárias instaladas. Você pode instalar as dependências com o seguinte comando:
+
+```bash
+pip install numpy pandas scikit-learn spyne
+```
+
+### Passo 2: Iniciar o Servidor da API
+
+Certifique-se de que o servidor da API esteja em execução. Execute o seguinte comando no diretório onde seu código da API está localizado:
+
+```bash
+python seu_arquivo_da_api.py
+```
+
+### Passo 3: Fazer uma Requisição SOAP
+
+Agora, vamos fazer uma chamada de requisição SOAP para a API usando uma ferramenta como o [curl](https://curl.se/) ou [SOAPUI](https://www.soapui.org/). Neste exemplo, usaremos o `curl`.
+
+Crie um arquivo chamado `request.xml` com o seguinte conteúdo:
+
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://schemas.spyne.io/web">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:detect_anomalies>
+         <time_series_data>
+            <item>
+               <item>1.2</item>
+               <item>2.5</item>
+               <!-- Mais pontos de dados -->
+            </item>
+            <!-- Mais séries -->
+         </time_series_data>
+         <sensitivity>1.5</sensitivity>
+         <percentile>10.0</percentile>
+      </web:detect_anomalies>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+### Passo 4: Enviar a Requisição SOAP
+
+Use o seguinte comando para enviar a requisição SOAP para a API:
+
+```bash
+curl -X POST -H "Content-Type: text/xml" -d @request.xml http://localhost:8000/anomaly_detection_service/detect_anomalies
+```
+
+### Passo 5: Interpretar a Resposta
+
+A resposta da API será exibida no terminal. Ela incluirá os índices dos pontos de anomalia detectados nas séries temporais fornecidas.
+
+Por exemplo:
+
+```xml
+<web:detect_anomaliesResponse>
+   <return>
+      <item>
+         <item>2</item>
+         <item>5</item>
+         <!-- Índices das anomalias detectadas -->
+      </item>
+      <!-- Anomalias para outras séries -->
+   </return>
+</web:detect_anomaliesResponse>
+```
+
+### Conclusão
+
+Você completou com sucesso o tutorial para usar a API de detecção de anomalias em séries temporais. Este é um exemplo básico de como fazer chamadas de requisição SOAP para a API e interpretar as respostas. Você pode adaptar e expandir este tutorial para atender às suas necessidades e integrá-lo aos seus projetos.
+
+Lembre-se de que este tutorial é apenas uma introdução e você pode personalizá-lo para atender aos seus requisitos específicos e incluir mais informações sobre os recursos da API, autenticação, tratamento de erros, etc.
